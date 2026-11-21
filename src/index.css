@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #3b82f6;
+  --color-primary-dark: #2563eb;
+  --color-primary-light: #60a5fa;
+  --color-accent: #06b6d4;
+  --color-dark: #030712;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  margin: 0;
+  background: #030712;
+  color: #f8fafc;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Global site background layer ── */
+.site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: #030712;
+}
+
+/* Primary deep-blue to near-black base */
+.site-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 100% 55% at 50% 0%,   rgba(29,78,216,0.18)  0%, transparent 70%),
+    radial-gradient(ellipse 70%  50% at 15% 30%,  rgba(99,102,241,0.10) 0%, transparent 65%),
+    radial-gradient(ellipse 60%  45% at 85% 25%,  rgba(14,165,233,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 80%  60% at 50% 100%, rgba(15,23,42,1)       0%, transparent 100%);
+}
+
+/* Mid-scroll accent orbs — shift position on the Y axis */
+.site-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 35% at 80% 55%,  rgba(139,92,246,0.07)  0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 20% 65%,  rgba(59,130,246,0.09)  0%, transparent 65%),
+    radial-gradient(ellipse 60% 35% at 50% 85%,  rgba(6,182,212,0.07)   0%, transparent 65%);
+}
+
+@keyframes site-orb-drift {
+  0%,100% { transform: translateY(0)   scale(1);    opacity: 1; }
+  50%      { transform: translateY(30px) scale(1.06); opacity: .75; }
+}
+
+.site-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  animation: site-orb-drift linear infinite;
+  pointer-events: none;
+}
+
+/* Blue custom scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #030712; }
+::-webkit-scrollbar-thumb { background: #1e3a5f; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.glass-hover:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.14);
+}
+
+/* Grid background */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Text selection */
+::selection {
+  background: rgba(59,130,246,0.35);
+  color: #fff;
+}
